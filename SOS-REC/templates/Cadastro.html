@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>S.O.S REC - Moradores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossorigin="anonymous" />
+
+    <!-- Seu CSS personalizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+</head>
+<body>
+
+<!-- Navbar igual à principal -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #c69774;">
+    <div class="container-fluid justify-content-center">
+        <a class="navbar-brand navbar-title mx-auto" href="index.html">
+             🚨 SOS-REC 🚨
+        </a>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 class="mt-4"> Cadastro de Moradores</h1>
+
+    <div class="card p-4 mt-3">
+        <form action="/add" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input id="nome" type="text" name="nome" class="form-control" placeholder="Digite o nome" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" class="form-control" placeholder="Digite o email" required />
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input id="cpf" type="text" name="cpf" class="form-control" placeholder="Digite o CPF" required />
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input id="telefone" type="text" name="telefone" class="form-control" placeholder="Digite o telefone" required />
+            </div>
+            <div class="form-group">
+                <label for="endereco">Endereço</label>
+                <input id="endereco" type="text" name="endereco" class="form-control" placeholder="Digite o endereço" required />
+            </div>
+            <div class="form-group">
+                <label for="numeroCasa">Número da Casa</label>
+                <input id="numeroCasa" type="text" name="numeroCasa" class="form-control" placeholder="Digite o número" required />
+            </div>
+            <div class="form-group">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input id="dataNascimento" type="date" name="dataNascimento" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="sexo">Sexo</label>
+                <select id="sexo" name="sexo" class="form-control" required>
+                    <option value="" disabled selected>Selecione o sexo</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                    <option value="O">Outro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input id="senha" type="password" name="senha" class="form-control" placeholder="Digite a senha" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+
+    <h2 class="mt-5">Moradores Cadastrados</h2>
+    <ul class="list-group">
+        {% for morador in moradores %}
+            <li class="list-group-item">
+                <strong>{{ morador.nome }}</strong> - {{ morador.email }}
+            </li>
+        {% endfor %}
+    </ul>
+
+
+
+</div>
+
+</body>
+</html>

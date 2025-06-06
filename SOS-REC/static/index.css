@@ -1,0 +1,50 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f1ea; /* tom suave para fundo */
+    color: #333;
+}
+
+.navbar {
+    background-color: #c69774 !important; /* cor da navbar */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(198 151 116 / 0.3);
+    background-color: white;
+}
+
+.btn-primary {
+    background-color: #c69774;
+    border-color: #c69774;
+}
+
+.btn-primary:hover {
+    background-color: #b07a59;
+    border-color: #b07a59;
+}
+
+h1, h2 {
+    color: #6b4c3b;
+}
+
+.list-group-item {
+    border-color: #c69774;
+}
+
+input.form-control, select.form-control {
+    border-radius: 4px;
+    border: 1px solid #c69774;
+}
+
+input.form-control:focus, select.form-control:focus {
+    box-shadow: 0 0 5px #c69774;
+    border-color: #a66f4b;
+    outline: none;
+}
+
