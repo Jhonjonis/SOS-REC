@@ -7,6 +7,7 @@ import psycopg2
 import requests  # Para previsão do tempo
 from bs4 import BeautifulSoup
 from flask import jsonify
+from flood_model import FloodPredictor
 
 # Inicialização do aplicativo Flask
 app = Flask(__name__)
@@ -250,6 +251,31 @@ def previsao_tempo():
     except Exception as e:
         print("Erro ao obter previsão do tempo:", e)
         return jsonify({'erro': 'Não foi possível obter a previsão', 'detalhe': str(e)}), 500
+    
+
+# Previsão/avaliação de risco de inundação
+@app.route('/prever_inundacao')
+def prever_inundacao():
+    conn = get_db_connection()
+    weather_data = {}
+    try:
+        resp = requests.get(WEATHER_URL, timeout=5)
+        resp.raise_for_status()
+        weather_data = resp.json()
+    except Exception as e:
+        print(f"Aviso: não foi possível obter dados meteorológicos: {e}")
+
+    predictor = FloodPredictor(model_path='models/flood_model.joblib')
+    if conn:
+        try:
+            result = predictor.predict_from_db(conn, limit=10, weather=weather_data)
+        finally:
+            conn.close()
+    else:
+        # Sem conexão ao banco, faz previsão apenas com nenhum sensor (vazio)
+        result = predictor.predict([], weather_data)
+
+    return jsonify(result)
  
 
 if __name__ == '__main__':
